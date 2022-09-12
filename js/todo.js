@@ -11,6 +11,6 @@ function addTask (){
     if (field.value){
          const newTask = createTask(field.value)
         divList.appendChild(newTask)
-        field.value = '';
+        field.value = '';}
 }
 button.addEventListener('click', addTask)
