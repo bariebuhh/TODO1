@@ -7,9 +7,6 @@ function createTask (value){
     task.textContent = value 
     return task;
 }
-function completeTask(event){
-
-}
 function addTask (){
     if (field.value){
          const newTask = createTask(field.value)
