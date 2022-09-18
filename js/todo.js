@@ -1,35 +1,37 @@
 const field = document.querySelector('.field');
 const button = document.querySelector('.add');
-const divList = document.querySelector('.list');
+const taskList = document.querySelector('.list');
 
-function createTask (value){
+function createTask(value){
     const task = document.createElement("div");
-    task.textContent = value ;
+    task.textContent = value;
     
     let checkbox = document.createElement("input");
-        checkbox.type = 'checkbox';
-        checkbox.classList.add('status');
-        checkbox.addEventListener('click', completeTask);
+    checkbox.type = 'checkbox';
+    checkbox.classList.add('taskStatus');
+    checkbox.addEventListener('click', toggleTaskStatus);
+    checkbox.classList.add('buttons');
 
     let deleteTask = document.createElement("button");
-        deleteTask.type = 'button';
-        deleteTask.classList.add('delete');
-        deleteTask.innerHTML = "X";
-        deleteTask.addEventListener('click', del);
+    deleteTask.type = 'button';
+    deleteTask.classList.add('delete');
+    deleteTask.innerHTML = "X";
+    deleteTask.addEventListener('click', removeTask);
+    deleteTask.classList.add('buttons');
 
     task.append(checkbox);
     task.append(deleteTask);
-    task.classList.add('taskStyle')
+    task.classList.add('task');
     return task;
     }
 
-function del(){
+function removeTask(){
     this.closest('div').remove()
     }
 
-function completeTask(event){
+function toggleTaskStatus(event){
     const checkbox = event.target;
-    const task = checkbox.parentElement
+    const task = checkbox.parentElement;
     if (checkbox.checked){
         task.classList.add ('success');
         task.classList.remove('unsuccess');
@@ -39,11 +41,16 @@ function completeTask(event){
     }
 }
 
-function addTask (){
+function addTask(){
     if (field.value){
-         const newTask = createTask(field.value)
-        divList.appendChild(newTask)
-        field.value = '';}
+    const newTask = createTask(field.value)
+    taskList.insertBefore(newTask, taskList.firstChild)
+    field.value = '';}
 }
 
 button.addEventListener('click', addTask)
+field.addEventListener("keypress", function(event) {
+   if (event.key === "Enter") {
+    button.click();
+  }
+});
