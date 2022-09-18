@@ -11,6 +11,7 @@ body{
     justify-content: center;
     flex-direction: row;
    height: max-content;
+   background-color: bisque;
 }
 .field{
     width: 200px;
